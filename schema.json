@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Muse desk position",
+  "type": "object",
+  "required": ["schema_version", "desk", "position", "reasoning", "would_change"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+    "desk": { "const": "muse" },
+    "position": {
+      "type": "object",
+      "required": ["BTC", "ETH", "LTC", "cash"],
+      "additionalProperties": false,
+      "properties": {
+        "BTC": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "ETH": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "LTC": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "cash": { "type": "integer", "minimum": 0, "maximum": 100 }
+      },
+      "$comment": "The four values must add up to exactly 100."
+    },
+    "reasoning": { "type": "string", "minLength": 1, "maxLength": 280 },
+    "would_change": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "confidence": { "enum": ["low", "low-medium", "medium", "medium-high", "high"] },
+    "notes": { "type": "object" }
+  }
+}
